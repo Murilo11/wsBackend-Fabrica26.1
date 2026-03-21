@@ -6,7 +6,7 @@ Aplicação web para gestão de patrimônio familiar em criptomoedas. Permite ca
 
 ## 🛠️ Tecnologias
 
-- **Python 3.11** + **Django 6**
+- **Python 3.12** + **Django 6**
 - **PostgreSQL 16** — banco de dados relacional
 - **Docker** + **Docker Compose** — containerização
 - **CoinGecko API** — preços de criptomoedas em tempo real (gratuita)
