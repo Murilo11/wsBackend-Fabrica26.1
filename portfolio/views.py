@@ -99,18 +99,3 @@ def asset_delete(request, id):
         asset.delete()
         return redirect("dashboard")
     return render(request, 'portfolio/asset_confirm_delete.html', {'asset': asset})    
-    
-
-
-
-
-        
-    
-
-    
-
-       
-
-
-
-
