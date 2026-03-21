@@ -22,4 +22,4 @@ class CryptoAsset(models.Model):
 
 
 
-# Create your models here.
+
