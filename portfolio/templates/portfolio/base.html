@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holding Familiar — Crypto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #1e1e2e;
+            --accent: #7c6af7;
+            --accent-dim: #3d3580;
+            --text: #e8e6ff;
+            --text-muted: #6b6880;
+            --green: #3dffa0;
+            --red: #ff5f6d;
+        }
+ 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            min-height: 100vh;
+        }
+ 
+        /* ── NAV ── */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 2.5rem;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+ 
+        .nav-brand {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+        }
+ 
+        .nav-brand span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+ 
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+ 
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            letter-spacing: 0.03em;
+        }
+ 
+        .nav-links a:hover {
+            color: var(--text);
+            border-color: var(--border);
+            background: var(--border);
+        }
+ 
+        .nav-links a.btn-primary {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            color: var(--text);
+        }
+ 
+        .nav-links a.btn-primary:hover {
+            background: var(--accent);
+        }
+ 
+        /* ── MAIN CONTENT ── */
+        main {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
+        }
+ 
+        /* ── CARDS ── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+ 
+        /* ── TABLES ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+ 
+        th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+ 
+        td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+ 
+        tr:last-child td {
+            border-bottom: none;
+        }
+ 
+        tr:hover td {
+            background: var(--border);
+        }
+ 
+        /* ── FORMS ── */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+ 
+        label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+ 
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+ 
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: var(--accent);
+        }
+ 
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            letter-spacing: 0.03em;
+        }
+ 
+        .btn-save {
+            background: var(--accent);
+            color: #fff;
+        }
+ 
+        .btn-save:hover {
+            background: #6a58e0;
+        }
+ 
+        .btn-edit {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text-muted);
+        }
+ 
+        .btn-edit:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+ 
+        .btn-delete {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text-muted);
+        }
+ 
+        .btn-delete:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+ 
+        .btn-cancel {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text-muted);
+        }
+ 
+        .btn-cancel:hover {
+            background: var(--border);
+            color: var(--text);
+        }
+ 
+        /* ── HEADINGS ── */
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+ 
+        h2 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+ 
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+        }
+ 
+        /* ── PATRIMÔNIO BADGE ── */
+        .patrimonio {
+            color: var(--green);
+            font-weight: 500;
+        }
+ 
+        /* ── ACTIONS ROW ── */
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+ 
+        /* ── PAGE HEADER ── */
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+ 
+    <nav>
+        <a class="nav-brand" href="{% url 'dashboard' %}">holding<span>.familiar</span></a>
+        <div class="nav-links">
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'member_create' %}" class="btn-primary">+ Novo Membro</a>
+        </div>
+    </nav>
+ 
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+ 
+</body>
+</html>

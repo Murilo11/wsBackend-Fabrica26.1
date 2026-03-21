@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import FamilyMember, CryptoAsset
 from .services import get_crypto_prices
+from decimal import Decimal
 
 
 def dashboard(request):
@@ -18,14 +19,21 @@ def dashboard(request):
 
     for each_member in member:
         patrimonio_membro = 0
-        for each_asset in each_member.assets.all(): 
-            valor_ativo = each_asset.quantity * prices[each_asset.crypto_id]['brl']
-            patrimonio_membro += valor_ativo
+        assets_data = []
+        for each_asset in each_member.assets.all():
+            preco = prices.get(each_asset.crypto_id, {}).get('brl', 0)
+            valor = each_asset.quantity * Decimal(str(preco))
+            patrimonio_membro += valor
+            assets_data.append({
+                'asset': each_asset,
+                'valor': valor
+        })
 
         dados_do_membro = {
-                'member': each_member,
-                'patrimonio': patrimonio_membro
-            }
+        'member': each_member,
+        'patrimonio': patrimonio_membro,
+        'assets_data': assets_data
+        }
         member_data.append(dados_do_membro)
 
     patrimonio_total = sum(item['patrimonio'] for item  in member_data)

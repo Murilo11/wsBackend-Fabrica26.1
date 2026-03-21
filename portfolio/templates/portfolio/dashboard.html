@@ -1,0 +1,71 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>Patrimônio Familiar</h1>
+        <p class="subtitle">visão consolidada dos ativos em criptomoedas</p>
+    </div>
+</div>
+
+<div class="card" style="margin-bottom: 2rem; border-color: #3dffa033;">
+    <p style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem;">Patrimônio Total da Família</p>
+    <p class="patrimonio" style="font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;">
+        R$ {{ patrimonio_total|floatformat:2 }}
+    </p>
+</div>
+
+{% for item in member_data %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+            <h2 style="margin-bottom: 0.2rem;">{{ item.member.name }}</h2>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">{{ item.member.relationship }}</p>
+        </div>
+        <div class="actions">
+            <span class="patrimonio" style="font-size: 0.9rem; margin-right: 1rem;">R$ {{ item.patrimonio|floatformat:2 }}</span>
+            <a href="{% url 'asset_create' item.member.id %}" class="btn btn-edit">+ Ativo</a>
+            <a href="{% url 'member_edit' item.member.id %}" class="btn btn-edit">Editar</a>
+            <a href="{% url 'member_delete' item.member.id %}" class="btn btn-delete">Deletar</a>
+        </div>
+    </div>
+
+    {% if item.member.assets.all %}
+    <table>
+        <thead>
+            <tr>
+                <th>Cripto</th>
+                <th>Quantidade</th>
+                <th>Valor Total (BRL)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asset_item in item.assets_data %}
+<tr>
+    <td>{{ asset_item.asset.crypto_id }}</td>
+    <td>{{ asset_item.asset.quantity }}</td>
+    <td class="patrimonio">R$ {{ asset_item.valor|floatformat:2 }}</td>
+    <td>
+        <div class="actions">
+            <a href="{% url 'asset_edit' asset_item.asset.id %}" class="btn btn-edit">Editar</a>
+            <a href="{% url 'asset_delete' asset_item.asset.id %}" class="btn btn-delete">Deletar</a>
+        </div>
+    </td>
+</tr>
+{% endfor %}    
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; padding: 1rem 0;">nenhum ativo cadastrado</p>
+    {% endif %}
+</div>
+{% empty %}
+<div class="card" style="text-align: center; padding: 3rem;">
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">nenhum membro cadastrado ainda</p>
+    <a href="{% url 'member_create' %}" class="btn btn-save">+ Adicionar Membro</a>
+</div>
+{% endfor %}
+
+{% endblock %}

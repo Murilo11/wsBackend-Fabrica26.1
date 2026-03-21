@@ -1,0 +1,26 @@
+{% extends 'portfolio/base.html' %}
+ 
+{% block content %}
+ 
+<div class="page-header">
+    <div>
+        <h1>Deletar Ativo</h1>
+        <p class="subtitle">essa ação não pode ser desfeita</p>
+    </div>
+</div>
+ 
+<div class="card" style="max-width: 480px;">
+    <p style="margin-bottom: 0.5rem;">Tem certeza que deseja deletar o ativo:</p>
+    <p style="font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent); margin-bottom: 0.3rem;">{{ asset.crypto_id }}</p>
+    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">Quantidade: {{ asset.quantity }}</p>
+ 
+    <form method="POST">
+        {% csrf_token %}
+        <div class="actions">
+            <button type="submit" class="btn btn-delete" style="background: var(--red); border-color: var(--red); color: #fff;">Confirmar Exclusão</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-cancel">Cancelar</a>
+        </div>
+    </form>
+</div>
+ 
+{% endblock %}
