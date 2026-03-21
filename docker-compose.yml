@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-db:
+  db:
     image: postgres:16
     environment:
       POSTGRES_DB: holding_db
@@ -10,7 +10,7 @@ db:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-web:
+  web:
     build: .
     ports:
       - "8000:8000"
@@ -20,4 +20,4 @@ web:
       - .env
 
 volumes:
-    postgres_data:
+  postgres_data:
